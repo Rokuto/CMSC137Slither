@@ -18,9 +18,11 @@ public class SidePanel extends JPanel{
 	private Chatbox chatbox;
 
 	private Socket client;
+	private String name;
 
 	public SidePanel(GameFrame game, String name, String ip){
 		this.game = game;
+		this.name = name;
 
 		/* TCP */
 		try{
@@ -45,11 +47,28 @@ public class SidePanel extends JPanel{
 		add( new JScrollPane( text ), BorderLayout.CENTER ); // add to panel
 
 		/* Chat box */
-		chatbox = new Chatbox(this, name, ip); // initailization
+		chatbox = new Chatbox(this); // initailization
 		add( chatbox , BorderLayout.SOUTH ); // add to panel
+	}
+
+	public String getName(){
+		return this.name;
+	}
+
+	public String getTextToSend(){
+		return this.chatbox.getChatText();
+	}
+
+	public Socket getClient(){
+		return this.client;
 	}
 
 	public void appendHistory(String hist){
 		this.text.append("\n" + hist);
 	}
+
+	public void clearChat(){
+		this.chatbox.clearText();
+	}
+
 }

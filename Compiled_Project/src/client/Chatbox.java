@@ -17,7 +17,7 @@ public class Chatbox extends JPanel{
 	private JTextArea text;
 	private JButton send;
 
-	public Chatbox(SidePanel chat, String name, String ip){
+	public Chatbox(SidePanel chat){
 		this.chat = chat;
 
 		/* Panel Properties */
@@ -32,7 +32,15 @@ public class Chatbox extends JPanel{
 		
 		/* Send button */
 		send = new JButton("Send"); // initialization
-		send.addActionListener( new sendActionListener(chat) ); // action of the button
+		send.addActionListener( new SendActionListener(chat) ); // action of the button
 		add( send, BorderLayout.EAST ); // add to panel
+	}
+
+	public String getChatText(){
+		return text.getText().trim();
+	}
+
+	public void clearText(){
+		text.setText("");
 	}
 }
