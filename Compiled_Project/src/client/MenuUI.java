@@ -31,14 +31,14 @@ public class MenuUI extends JFrame implements ActionListener{
 	private JFrame frame_game;
 	
 	//image file instantiation
-	Image img_background = new ImageIcon("img/backgroundv2.jpg").getImage();
-	Image img_backgroundv2 = new ImageIcon("img/backgroundv3.jpg").getImage();
-	Image img_enter = new ImageIcon("img/enter.png").getImage();
-	Image img_highscores = new ImageIcon("img/highscores.png").getImage();
-	Image img_instructions = new ImageIcon("img/instructions.png").getImage();
-	Image img_back = new ImageIcon("img/back.png").getImage();
-	Image img_lbl_hs = new ImageIcon("img/highscores_clk.png").getImage();
-	Image img_lbl_ins = new ImageIcon("img/instructions_clk.png").getImage();
+	Image img_background 	= new ImageIcon("img/menu/backgroundv2.jpg").getImage();
+	Image img_backgroundv2 	= new ImageIcon("img/menu/backgroundv3.jpg").getImage();
+	Image img_enter 		= new ImageIcon("img/menu/enter.png").getImage();
+	Image img_highscores 	= new ImageIcon("img/menu/highscores.png").getImage();
+	Image img_instructions 	= new ImageIcon("img/menu/instructions.png").getImage();
+	Image img_back 			= new ImageIcon("img/menu/back.png").getImage();
+	Image img_lbl_hs 		= new ImageIcon("img/menu/highscores_clk.png").getImage();
+	Image img_lbl_ins 		= new ImageIcon("img/menu/instructions_clk.png").getImage();
 	
 	//JPanel instantiation
 	JPanel panel;
@@ -48,24 +48,24 @@ public class MenuUI extends JFrame implements ActionListener{
 	JPanel pnl_menu;
 	
 	//JLabel instantiation
-	JLabel lbl_highscores = new JLabel(new ImageIcon(img_lbl_hs));
+	JLabel lbl_highscores 	= new JLabel(new ImageIcon(img_lbl_hs));
 	JLabel lbl_instructions = new JLabel(new ImageIcon(img_lbl_ins));
 	
 	//JButton instantiation
-	JButton btn_enter = new JButton(new ImageIcon(img_enter));
-	JButton btn_highscores = new JButton(new ImageIcon(img_highscores));
-	JButton btn_instructions = new JButton(new ImageIcon(img_instructions));
-	JButton btn_back1 = new JButton(new ImageIcon(img_back));
-	JButton btn_back2 = new JButton(new ImageIcon(img_back));
+	JButton btn_enter 			= new JButton(new ImageIcon(img_enter));
+	JButton btn_highscores 		= new JButton(new ImageIcon(img_highscores));
+	JButton btn_instructions 	= new JButton(new ImageIcon(img_instructions));
+	JButton btn_back1 			= new JButton(new ImageIcon(img_back));
+	JButton btn_back2 			= new JButton(new ImageIcon(img_back));
 	
 	//JTextField instantiation
-	JTextField txtfld_usrname = new JTextField(20);
-	JTextArea instructions = new JTextArea();
+	JTextField txtfld_usrname 	= new JTextField(20);
+	JTextArea instructions 		= new JTextArea();
 	
 	//Other instantiation
-	Border border = BorderFactory.createLineBorder(Color.YELLOW, 5);
-	Border btn_border = BorderFactory.createLineBorder(Color.GREEN, 2);
-	Font font1 = txtfld_usrname.getFont().deriveFont(Font.PLAIN, 20f);
+	Border border 		= BorderFactory.createLineBorder(Color.YELLOW, 5);
+	Border btn_border 	= BorderFactory.createLineBorder(Color.GREEN, 2);
+	Font font1 			= txtfld_usrname.getFont().deriveFont(Font.PLAIN, 20f);
 	
 
 	public MenuUI(){ // Constructor
