@@ -1,5 +1,10 @@
-import java.net.*;
-import java.io.*;
+import java.net.Socket;
+import java.net.SocketTimeoutException;
+
+import java.io.IOException;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+
 
 public class keepAlive extends Thread{
    private static Socket[] socket = new Socket[10];

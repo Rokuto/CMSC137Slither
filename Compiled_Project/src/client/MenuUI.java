@@ -25,6 +25,7 @@ import javax.swing.OverlayLayout;
 import javax.swing.Timer;
 import javax.swing.border.Border;
 
+
 public class MenuUI extends JFrame implements ActionListener{
 	private JFrame frame_main;
 	private JFrame frame_game;
@@ -195,13 +196,17 @@ public class MenuUI extends JFrame implements ActionListener{
 		if(e.getSource() == btn_enter){
 			
 			frame_main.dispose();
+
+			String ip = "127.0.0.1";
 			
+			new GameFrame(txtfld_usrname.getText(), ip);
+
 			//new window properties
-			frame_game = new JFrame("Slitherin");
-			frame_game.setSize(1000, 700);
-			frame_game.setResizable(false);
-			frame_game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			frame_game.setVisible(true);
+			// frame_game = new JFrame("Slitherin");
+			// frame_game.setSize(1000, 700);
+			// frame_game.setResizable(false);
+			// frame_game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			// frame_game.setVisible(true);
 			
 		}else if(e.getSource() == btn_highscores){
 			cardLayout.show(panel, "Highscores"); 

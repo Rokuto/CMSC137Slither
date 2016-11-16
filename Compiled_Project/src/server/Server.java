@@ -1,5 +1,9 @@
-import java.net.*;
-import java.io.*;
+import java.net.Socket;
+import java.net.ServerSocket;
+import java.net.SocketTimeoutException;
+
+import java.io.IOException;
+
 
 public class Server extends Thread{
    private ServerSocket serverSocket;
