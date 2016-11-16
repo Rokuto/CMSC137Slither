@@ -21,15 +21,17 @@ public class keepAlive extends Thread{
 		
 		total++; // increment "total" number of players
 		
+		/* Reallocation of connected players */
 		if(total > max-1){
-			System.out.println(max);
-			max++;
-			Socket[] newSocket = new Socket[max];
+			max++; // iterate maximum
+			Socket[] newSocket = new Socket[max]; // create a new array list
+			
+			/* Migration of previous data */
 			for(int i = 0; i < max-1; i++){	
 				newSocket[i] = sockets[i];
 			}
 
-			this.sockets = newSocket;
+			this.sockets = newSocket; // use new list
 		}
 	}
 
