@@ -19,12 +19,12 @@ public class CanvasArena extends JPanel implements Runnable {
 
 	public CanvasArena() {
 		screenSize = Main.getScreenSize();
-		setBackground(Color.GRAY);
+		setBackground(Color.BLACK);
 		setPreferredSize(new Dimension(3*(screenSize.width/4), screenSize.height));
-		multiplier_x = ((3*(screenSize.width/4))/8);
-		multiplier_y = (screenSize.height/8);
-		offset_x = (((3*(screenSize.width/4))/8)-50)/2;
-		offset_y = ((screenSize.height/8)-50)/2;
+		multiplier_x = ((3*(screenSize.width/4))/9);
+		multiplier_y = (screenSize.height/9);
+		offset_x = (((3*(screenSize.width/4))/9)-50)/2;
+		offset_y = ((screenSize.height/9)-50)/2;
 		setOpaque(true);
 	}
 
@@ -51,8 +51,8 @@ public class CanvasArena extends JPanel implements Runnable {
 		} else if(n==3) {
 			g.setColor(Color.RED);
 		}
-		x[i] = random.nextInt(5);
-		y[i] = random.nextInt(5);
+		x[i] = random.nextInt(9);
+		y[i] = random.nextInt(9);
 	    g.fillOval(x[i] * multiplier_x + offset_x, y[i] * multiplier_y  + offset_y, 50, 50);
 		}
 	}

@@ -18,8 +18,8 @@ public class Snake extends JPanel implements Runnable {
 		setOpaque(false);
 
 		setPreferredSize(new Dimension(3*(screenSize.width/4), screenSize.height));
-		multiplier_x = ((3*(screenSize.width/4))/8);
-		multiplier_y = (screenSize.height/8);
+		multiplier_x = ((3*(screenSize.width/4))/9);
+		multiplier_y = (screenSize.height/9);
 
 		position_x[3] = 4;
 		position_x[2] = 3;
@@ -30,7 +30,13 @@ public class Snake extends JPanel implements Runnable {
 		position_y[1] = 5;
 		position_y[0] = 5;
 
-		this.addKeyListener(new KeyListener () {
+		addKeyListener(new KeyListener () {
+			@Override
+      public void keyTyped(KeyEvent e){}
+
+      @Override
+      public void keyReleased(KeyEvent e){}
+
 			@Override
 			public void keyPressed(KeyEvent e) {
 				System.out.println(e.getKeyChar());
