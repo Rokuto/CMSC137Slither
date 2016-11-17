@@ -215,8 +215,7 @@ public class MenuUI extends JFrame implements ActionListener{
 			// frame_game = new JFrame("Slitherin");
 			// frame_game.setSize(1000, 700);
 			// frame_game.setResizable(false);
-			// frame_game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			
+
 		}else if(e.getSource() == btn_highscores){
 			cardLayout.show(panel, "Highscores"); 
 		}else if(e.getSource() == btn_instructions){
@@ -224,6 +223,6 @@ public class MenuUI extends JFrame implements ActionListener{
 		}else if(e.getSource() == btn_back1 || e.getSource() == btn_back2){
 			cardLayout.show(panel, "Main"); 
 		}
-		
+
 	}
 }
