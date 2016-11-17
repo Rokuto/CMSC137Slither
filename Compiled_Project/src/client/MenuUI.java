@@ -57,9 +57,10 @@ public class MenuUI extends JFrame implements ActionListener{
 	JButton btn_instructions 	= new JButton(new ImageIcon(img_instructions));
 	JButton btn_back1 			= new JButton(new ImageIcon(img_back));
 	JButton btn_back2 			= new JButton(new ImageIcon(img_back));
-	
+
 	//JTextField instantiation
 	JTextField txtfld_usrname 	= new JTextField(20);
+	JTextField txtfld_ipaddress = new JTextField(20);
 	JTextArea instructions 		= new JTextArea();
 	
 	//Other instantiation
@@ -110,9 +111,17 @@ public class MenuUI extends JFrame implements ActionListener{
 			
 		//set textfield properties
 		txtfld_usrname.setBorder(border);
-		txtfld_usrname.setBounds(275, 300, 300, 40);
+		txtfld_usrname.setBounds(220, 300, 200, 40);
 		txtfld_usrname.setFont(font1);
 		txtfld_usrname.setHorizontalAlignment(JTextField.CENTER);
+		txtfld_usrname.setText("Username");
+		
+		
+		txtfld_ipaddress.setBorder(border);
+		txtfld_ipaddress.setBounds(430, 300, 200, 40);
+		txtfld_ipaddress.setFont(font1);
+		txtfld_ipaddress.setHorizontalAlignment(JTextField.CENTER);
+		txtfld_ipaddress.setText("IP Address");
 		
 		//button properties and position
 		btn_enter.setBounds(325, 360, 200, 50);
@@ -153,6 +162,7 @@ public class MenuUI extends JFrame implements ActionListener{
 		
 		//menu components
 		pnl_main.add(txtfld_usrname);
+		pnl_main.add(txtfld_ipaddress);
 		pnl_main.add(btn_enter);
 		pnl_main.add(btn_highscores);
 		pnl_main.add(btn_instructions);
@@ -205,7 +215,7 @@ public class MenuUI extends JFrame implements ActionListener{
 			// frame_game = new JFrame("Slitherin");
 			// frame_game.setSize(1000, 700);
 			// frame_game.setResizable(false);
-			
+
 		}else if(e.getSource() == btn_highscores){
 			cardLayout.show(panel, "Highscores"); 
 		}else if(e.getSource() == btn_instructions){
@@ -213,6 +223,6 @@ public class MenuUI extends JFrame implements ActionListener{
 		}else if(e.getSource() == btn_back1 || e.getSource() == btn_back2){
 			cardLayout.show(panel, "Main"); 
 		}
-		
+
 	}
 }
