@@ -84,6 +84,8 @@ public class MenuUI extends JFrame implements ActionListener{
 		};
 		
 		pnl_main.setLayout(null);
+￼	ip address textfield			b531817
+￼	
 		
 		//highscores panel
 		pnl_highscores = new JPanel(){
@@ -149,7 +151,7 @@ public class MenuUI extends JFrame implements ActionListener{
 		
 		//JTextArea property
 		instructions = new JTextArea(
-			    "↑/W - Move Up " + "\n" +
+			    "↑/W - Move Upper " + "\n" +
 			    "←/A - Move Left" + "\n" +
 			    "↓/S - Move Down" + "\n" +
 			    "→/D - Move Right" + "\n"
