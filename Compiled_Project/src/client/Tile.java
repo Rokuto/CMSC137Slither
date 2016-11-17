@@ -52,6 +52,6 @@ public class Tile extends JPanel{
 		setLayout(new BorderLayout());
       	setOpaque(false);
       	setPreferredSize(new Dimension(25,25));
-		add(new JLabel(bodyGreen));				
+		add(new JLabel(snakeBody));				
 	}
 }
