@@ -121,7 +121,7 @@ public class MenuUI extends JFrame implements ActionListener{
 		txtfld_ipaddress.setBounds(430, 300, 200, 40);
 		txtfld_ipaddress.setFont(font1);
 		txtfld_ipaddress.setHorizontalAlignment(JTextField.CENTER);
-		txtfld_ipaddress.setText("IP Address");
+		txtfld_ipaddress.setText("127.0.0.1");
 		
 		//button properties and position
 		btn_enter.setBounds(325, 360, 200, 50);
@@ -207,9 +207,9 @@ public class MenuUI extends JFrame implements ActionListener{
 			
 			frame_main.dispose();
 
-			String ip = "127.0.0.1";
+			// String ip = "127.0.0.1";
 			
-			new GameFrame(txtfld_usrname.getText(), ip);
+			new GameFrame(txtfld_usrname.getText().trim(), txtfld_ipaddress.getText().trim());
 
 			//new window properties
 			// frame_game = new JFrame("Slitherin");
