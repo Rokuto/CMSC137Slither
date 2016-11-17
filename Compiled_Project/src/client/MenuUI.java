@@ -57,7 +57,7 @@ public class MenuUI extends JFrame implements ActionListener{
 	JButton btn_instructions 	= new JButton(new ImageIcon(img_instructions));
 	JButton btn_back1 			= new JButton(new ImageIcon(img_back));
 	JButton btn_back2 			= new JButton(new ImageIcon(img_back));
-	
+
 	//JTextField instantiation
 	JTextField txtfld_usrname 	= new JTextField(20);
 	JTextField txtfld_ipaddress = new JTextField(20);
