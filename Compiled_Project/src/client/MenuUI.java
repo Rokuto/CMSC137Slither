@@ -205,8 +205,6 @@ public class MenuUI extends JFrame implements ActionListener{
 			// frame_game = new JFrame("Slitherin");
 			// frame_game.setSize(1000, 700);
 			// frame_game.setResizable(false);
-			// frame_game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			// frame_game.setVisible(true);
 			
 		}else if(e.getSource() == btn_highscores){
 			cardLayout.show(panel, "Highscores"); 
