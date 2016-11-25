@@ -4,6 +4,8 @@ public class Main{
 	
    /* Main Server Start */
    public static void main(String [] args){
+      new UDPServer();
+      
       try{
          // int port = Integer.parseInt(args[0]);  // take the port as a command input
          
