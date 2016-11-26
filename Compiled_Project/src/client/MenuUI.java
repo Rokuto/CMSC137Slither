@@ -81,7 +81,8 @@ public class MenuUI extends JFrame implements ActionListener{
 	//JTextField instantiation
 	JTextField txtfld_usrname 	= new JTextField(20);
 	JTextField txtfld_ipaddress = new JTextField(20);
-	
+	JTextField txtfld_idno		= new JTextField(20);
+		
 	//Other instantiation
 	Border border 		= BorderFactory.createLineBorder(Color.YELLOW, 5);
 	Border btn_border 	= BorderFactory.createLineBorder(Color.GREEN, 2);
@@ -146,17 +147,23 @@ public class MenuUI extends JFrame implements ActionListener{
 			
 		//set textfield properties
 		txtfld_usrname.setBorder(border);
-		txtfld_usrname.setBounds(220, 300, 200, 40);
+		txtfld_usrname.setBounds(100, 300, 200, 40);
 		txtfld_usrname.setFont(font1);
 		txtfld_usrname.setHorizontalAlignment(JTextField.CENTER);
 		txtfld_usrname.setText("Username");
 		
 		
 		txtfld_ipaddress.setBorder(border);
-		txtfld_ipaddress.setBounds(430, 300, 200, 40);
+		txtfld_ipaddress.setBounds(315, 300, 200, 40);
 		txtfld_ipaddress.setFont(font1);
 		txtfld_ipaddress.setHorizontalAlignment(JTextField.CENTER);
 		txtfld_ipaddress.setText("127.0.0.1");
+		
+		txtfld_idno.setBorder(border);
+		txtfld_idno.setBounds(530, 300, 200, 40);
+		txtfld_idno.setFont(font1);
+		txtfld_idno.setHorizontalAlignment(JTextField.CENTER);
+		txtfld_idno.setText("ID No.");
 		
 		//button properties and position
 		btn_enter.setBounds(325, 360, 200, 50);
@@ -185,6 +192,7 @@ public class MenuUI extends JFrame implements ActionListener{
 		//menu components
 		pnl_main.add(txtfld_usrname);
 		pnl_main.add(txtfld_ipaddress);
+		pnl_main.add(txtfld_idno);
 		pnl_main.add(btn_enter);
 		pnl_main.add(btn_highscores);
 		pnl_main.add(btn_instructions);
