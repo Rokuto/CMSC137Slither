@@ -4,15 +4,15 @@ import java.lang.ArrayIndexOutOfBoundsException;
 
 
 public class Snake extends Thread{
-	
+
 	private int playerNo;
-	
+
 	private int direction;
 	private int bodyMap[][];
 
 	private static Tile tiles[][];
 	private static int internalBoard[][];
-	
+
 	private UDPServer server;
 
 	public Snake(UDPServer server, Tile tiles[][], int internalBoard[][], int playerNo){
@@ -36,7 +36,7 @@ public class Snake extends Thread{
 			try{
 				sleep(500);
 			}catch (Exception e) {
-				
+
 			}
 		}
 	}
@@ -83,7 +83,7 @@ public class Snake extends Thread{
 				internalBoard[ bodyMap[i][0] ][ bodyMap[i][1] ] = 8;
 				tiles[ bodyMap[i][0] ][ bodyMap[i][1] ].placeBody();
 			}
-		}		
+		}
 	}
 
 	public void changeDirection(int direction){
@@ -115,6 +115,7 @@ public class Snake extends Thread{
 
 			bodyMap[i][0] = bodyMap[i-1][0];
 			bodyMap[i][1] = bodyMap[i-1][1];
+			detectCollision();
 		}
 
 		switch( direction ){
@@ -153,4 +154,32 @@ public class Snake extends Thread{
 		// System.out.println("(" + bodyMap[0][0] + "," + bodyMap[0][1] + ") : (" + bodyMap[1][0] + "," + bodyMap[1][1]  + ") : (" + bodyMap[2][0] + "," + bodyMap[2][1]  + ") : (" + bodyMap[3][0] + "," + bodyMap[3][1]  + ")");
 		renderBoard();
 	}
+
+	public boolean isHead(int x, int y) {
+		if(bodyMap[0][0]==x && bodyMap[0][1]==y) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean isBody(int x, int y) {
+		for(int i=1; i<4; i++) {
+			if(bodyMap[i][0]==x && bodyMap[0][1]==y) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public void detectCollision() {
+		for(int i=0; i<ReceiveServer.players; i++) {
+			if(ReceiveServer.snakes[i].playerNo != playerNo) {
+				if(ReceiveServer.snakes[i].isHead(bodyMap[0][0], bodyMap[0][1]) || ReceiveServer.snakes[i].isBody(bodyMap[0][0], bodyMap[0][1])) {
+					System.out.println("Snake " + playerNo + "killed snake " + ReceiveServer.snakes[i].playerNo);
+				}
+			}
+		}
+	}
+
+
 }

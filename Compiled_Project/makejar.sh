@@ -8,5 +8,7 @@ cd bin/server
 jar cfm ../../ServerGlutonSnake.jar META-INF/MANIFEST.MF *.class
 cd ../..
 
+ping -n 6 127.0.0.1
+
 # java -jar GlutonSnake.jar
 # java -jar GlutonSnake.jar
