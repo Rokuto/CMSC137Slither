@@ -3,7 +3,9 @@ import java.util.Random;
 public class SpawnPower extends Thread{
 
 private static Tile tiles[][];
-private int powerMap[][];
+public static int players;
+public static int powerMap[][];
+
 private int maxPower=15;
 
   public SpawnPower(Tile tiles[][]) {
@@ -25,14 +27,25 @@ private int maxPower=15;
 }
 
   private void spawn() {
+    boolean noSnake = true;
+
     for(int i=0; i<maxPower; i++) {
       Random rand = new Random();
   		int x = rand.nextInt(25);
       int y = rand.nextInt(25);
       int type = rand.nextInt(3) + 1;
+
+    for(int j=0; j<ReceiveServer.players; j++) {
+      if(ReceiveServer.snakes[j].isHead(x, y) || ReceiveServer.snakes[j].isBody(x, y)) {
+        noSnake = false;
+      }
+    }
+
+    if(noSnake) {
       powerMap[i][0] = x;
       powerMap[i][1] = y;
-
+    }
+    
       switch(type) {
         case 1: tiles[x][y].placeSpeed();
                 break;
