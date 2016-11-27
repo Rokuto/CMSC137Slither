@@ -171,11 +171,24 @@ public class Snake extends Thread{
 		return false;
 	}
 
+	public void isKilled() {
+		for(int i=0; i<4; i++) {
+			tiles[ bodyMap[i][0] ][ bodyMap[i][1] ].placeBlank();
+		}
+	}
+
 	public void detectCollision() {
 		for(int i=0; i<ReceiveServer.players; i++) {
 			if(ReceiveServer.snakes[i].playerNo != playerNo) {
 				if(ReceiveServer.snakes[i].isHead(bodyMap[0][0], bodyMap[0][1]) || ReceiveServer.snakes[i].isBody(bodyMap[0][0], bodyMap[0][1])) {
 					System.out.println("Snake " + playerNo + "killed snake " + ReceiveServer.snakes[i].playerNo);
+					try {
+						isKilled();
+						ReceiveServer.snakes[i].join();
+					} catch(InterruptedException e) {
+						System.out.println("Interrupted");
+					}
+
 				}
 			}
 		}
