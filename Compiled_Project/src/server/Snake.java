@@ -7,6 +7,8 @@ public class Snake extends Thread{
 
 	private int playerNo;
 	private int score = 0;
+	private int turnCnt;
+	private int time;
 
 	private int direction;
 	private int bodyMap[][];
@@ -30,12 +32,34 @@ public class Snake extends Thread{
 
 	public void run(){
 		while(true){
-			this.move();
+			int type = this.move();
 			// System.out.println("");
 			printBoard();
 			// System.out.println("");
+			switch(type) {
+				case 1: time = 200;
+								turnCnt = 5;
+								break;
+				case 2: time = 800;
+								turnCnt = 3;
+								break;
+				case 3: score--;
+								if(turnCnt==0) {
+									time = 500;
+								} else {
+									turnCnt--;
+								}
+								break;
+				default: if(turnCnt==0) {
+									time = 500;
+								} else {
+									turnCnt--;
+								}
+								break;
+			}
+
 			try{
-				sleep(500);
+				sleep(time);
 			}catch (Exception e) {
 
 			}
@@ -106,7 +130,7 @@ public class Snake extends Thread{
 		}
 	}
 
-	public void move(){
+	public int move(){
 
 		for(int i = 3; i > 0; i--){
 			if(i == 3){
@@ -116,7 +140,6 @@ public class Snake extends Thread{
 
 			bodyMap[i][0] = bodyMap[i-1][0];
 			bodyMap[i][1] = bodyMap[i-1][1];
-			detectCollision();
 		}
 
 		switch( direction ){
@@ -152,8 +175,11 @@ public class Snake extends Thread{
 			     break;
 		}
 
+		int type = detectPowerup();
+		detectCollision();
 		// System.out.println("(" + bodyMap[0][0] + "," + bodyMap[0][1] + ") : (" + bodyMap[1][0] + "," + bodyMap[1][1]  + ") : (" + bodyMap[2][0] + "," + bodyMap[2][1]  + ") : (" + bodyMap[3][0] + "," + bodyMap[3][1]  + ")");
 		renderBoard();
+		return type;
 	}
 
 	public boolean isHead(int x, int y) {
@@ -194,6 +220,17 @@ public class Snake extends Thread{
 				}
 			}
 		}
+	}
+
+	private int detectPowerup() {
+		for(int i=0; i<SpawnPower.maxPower; i++) {
+			int x = SpawnPower.powerMap[i][0];
+			int y = SpawnPower.powerMap[i][1];
+			if(isHead(x, y)) {
+				return (tiles[x][y].getType());
+			}
+		}
+		return 0;
 	}
 
 

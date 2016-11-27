@@ -5,13 +5,12 @@ public class SpawnPower extends Thread{
 private static Tile tiles[][];
 public static int players;
 public static int powerMap[][];
-
-private int maxPower=15;
+public static int maxPower=15;
 
   public SpawnPower(Tile tiles[][]) {
     this.tiles = tiles;
 
-    powerMap = new int[25][2];
+    powerMap = new int[maxPower][2];
   }
 
   public void run() {
@@ -42,17 +41,17 @@ private int maxPower=15;
     }
 
     if(noSnake) {
-      powerMap[i][0] = x;
-      powerMap[i][1] = y;
-    }
-    
-      switch(type) {
-        case 1: tiles[x][y].placeSpeed();
-                break;
-        case 2: tiles[x][y].placeSlow();
-                break;
-        case 3: tiles[x][y].placePoison();
-                break;
+        powerMap[i][0] = x;
+        powerMap[i][1] = y;
+
+        switch(type) {
+          case 1: tiles[x][y].placeSpeed();
+                  break;
+          case 2: tiles[x][y].placeSlow();
+                  break;
+          case 3: tiles[x][y].placePoison();
+                  break;
+        }
       }
     }
   }

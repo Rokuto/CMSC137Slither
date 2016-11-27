@@ -27,7 +27,7 @@ public class Tile extends JPanel{
       	setOpaque(false);
       	setPreferredSize(new Dimension(25,25));
       	add(new JLabel(background));
-				powerType=0;
+				//powerType=0;
 	}
 
 	public void changehead(int direction){
@@ -105,5 +105,9 @@ public class Tile extends JPanel{
       	setPreferredSize(new Dimension(25,25));
 		add(new JLabel(poison));
 		validate();
+	}
+
+	public int getType() {
+		return powerType;
 	}
 }
