@@ -4,15 +4,18 @@ import java.lang.ArrayIndexOutOfBoundsException;
 
 
 public class Snake extends Thread{
-	
+
 	private int playerNo;
-	
+	private int score = 0;
+	private int turnCnt;
+	private int time;
+
 	private int direction;
 	private int bodyMap[][];
 
 	private static Tile tiles[][];
 	private static int internalBoard[][];
-	
+
 	private UDPServer server;
 
 	public Snake(UDPServer server, Tile tiles[][], int internalBoard[][], int playerNo){
@@ -29,14 +32,36 @@ public class Snake extends Thread{
 
 	public void run(){
 		while(true){
-			this.move();
+			int type = this.move();
 			// System.out.println("");
 			printBoard();
 			// System.out.println("");
+			switch(type) {
+				case 1: time = 200;
+								turnCnt = 5;
+								break;
+				case 2: time = 800;
+								turnCnt = 3;
+								break;
+				case 3: score--;
+								if(turnCnt==0) {
+									time = 500;
+								} else {
+									turnCnt--;
+								}
+								break;
+				default: if(turnCnt==0) {
+									time = 500;
+								} else {
+									turnCnt--;
+								}
+								break;
+			}
+
 			try{
-				sleep(500);
+				sleep(time);
 			}catch (Exception e) {
-				
+
 			}
 		}
 	}
@@ -83,7 +108,7 @@ public class Snake extends Thread{
 				internalBoard[ bodyMap[i][0] ][ bodyMap[i][1] ] = 8;
 				tiles[ bodyMap[i][0] ][ bodyMap[i][1] ].placeBody();
 			}
-		}		
+		}
 	}
 
 	public void changeDirection(int direction){
@@ -105,7 +130,7 @@ public class Snake extends Thread{
 		}
 	}
 
-	public void move(){
+	public int move(){
 
 		for(int i = 3; i > 0; i--){
 			if(i == 3){
@@ -150,7 +175,63 @@ public class Snake extends Thread{
 			     break;
 		}
 
+		int type = detectPowerup();
+		detectCollision();
 		// System.out.println("(" + bodyMap[0][0] + "," + bodyMap[0][1] + ") : (" + bodyMap[1][0] + "," + bodyMap[1][1]  + ") : (" + bodyMap[2][0] + "," + bodyMap[2][1]  + ") : (" + bodyMap[3][0] + "," + bodyMap[3][1]  + ")");
 		renderBoard();
+		return type;
 	}
+
+	public boolean isHead(int x, int y) {
+		if(bodyMap[0][0]==x && bodyMap[0][1]==y) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean isBody(int x, int y) {
+		for(int i=1; i<4; i++) {
+			if(bodyMap[i][0]==x && bodyMap[0][1]==y) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private void isKilled() {
+		for(int i=0; i<4; i++) {
+			tiles[ bodyMap[i][0] ][ bodyMap[i][1] ].placeBlank();
+		}
+	}
+
+	private void detectCollision() {
+		for(int i=0; i<ReceiveServer.players; i++) {
+			if(ReceiveServer.snakes[i].playerNo != playerNo) {
+				if(ReceiveServer.snakes[i].isHead(bodyMap[0][0], bodyMap[0][1]) || ReceiveServer.snakes[i].isBody(bodyMap[0][0], bodyMap[0][1])) {
+					score++;
+					System.out.println("Snake " + playerNo + "killed snake " + ReceiveServer.snakes[i].playerNo + " Score " + score);
+					try {
+						isKilled();
+						ReceiveServer.snakes[i].join();
+					} catch(InterruptedException e) {
+						System.out.println("Interrupted");
+					}
+
+				}
+			}
+		}
+	}
+
+	private int detectPowerup() {
+		for(int i=0; i<SpawnPower.maxPower; i++) {
+			int x = SpawnPower.powerMap[i][0];
+			int y = SpawnPower.powerMap[i][1];
+			if(isHead(x, y)) {
+				return (tiles[x][y].getType());
+			}
+		}
+		return 0;
+	}
+
+
 }

@@ -19,7 +19,7 @@ public class UDPServer extends JFrame {
 	private static int internalBoard[][];
 
 	private final int PORT = 8888;
-	
+
 	private DatagramSocket socket = null;
     private DatagramPacket outPacket = null;
     private byte[] outBuf;
@@ -28,7 +28,7 @@ public class UDPServer extends JFrame {
 	private static int players = 0;
 	private static HashMap<String, Integer> playerAdd;
 	private static Snake snakes[] = new Snake[max];
-	
+
 	private static int dim = 25;
 	public UDPServer(){
 		super("Slitherin");
@@ -47,7 +47,9 @@ public class UDPServer extends JFrame {
 			}
 		}
 
-		try {	
+		new SpawnPower(tiles).start();
+
+		try {
     		socket = new DatagramSocket();
  		}catch(IOException ioe){
 	    	// System.out.println(ioe);
@@ -73,7 +75,7 @@ public class UDPServer extends JFrame {
 	    	outPacket = new DatagramPacket(outBuf, outBuf.length, address, PORT);
 
     		socket.send(outPacket);
-	    
+
 	    }catch(IOException ioe){
 	    	// System.out.println(ioe);
 	    }

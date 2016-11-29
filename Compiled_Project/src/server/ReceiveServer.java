@@ -7,7 +7,7 @@ import java.net.MulticastSocket;
 import java.util.HashMap;
 
 public class ReceiveServer extends Thread {
-	
+
 	private static Tile tiles[][];
 	private static int internalBoard[][];
 
@@ -16,9 +16,9 @@ public class ReceiveServer extends Thread {
     private byte[] inBuf = new byte[256];
 
     private static int max;
-	private static int players;
+	public static int players;
 	private static HashMap<String, Integer> pAdd;
-	private static Snake snakes[];
+	public static Snake snakes[];
 
 	private UDPServer server;
 
@@ -38,7 +38,7 @@ public class ReceiveServer extends Thread {
 	      	socket = new MulticastSocket(8888);
 	      	InetAddress address = InetAddress.getByName("224.2.2.3");
 	  	    socket.joinGroup(address);
-	 
+
 	      	while (true) {
 	        	inPacket = new DatagramPacket(inBuf, inBuf.length);
 	        	socket.receive(inPacket);
@@ -72,7 +72,7 @@ public class ReceiveServer extends Thread {
 	        		server.sendData("" + players);
 	        		snakes[players] = new Snake(server, tiles, internalBoard, players);
 	        		snakes[players].start();
-	        		
+
 	        		players++;
 
 	        		expandPlayerSize();
@@ -90,10 +90,10 @@ public class ReceiveServer extends Thread {
 			Snake temp[] = new Snake[max];
 
 			/* Migration of previous data */
-			for(int i = 0; i < max-1; i++){	
+			for(int i = 0; i < max-1; i++){
 				temp[i] = snakes[i];
 			}
-			
+
 			this.snakes = temp;
 		}
 	}
