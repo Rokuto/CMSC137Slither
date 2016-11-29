@@ -25,10 +25,10 @@ import javax.swing.JTextField;
 import javax.swing.OverlayLayout;
 import javax.swing.Timer;
 import javax.swing.border.Border;
-import javax.swing.*;
 
-import java.io.*;
 import java.io.File;
+import java.io.FileReader;
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 

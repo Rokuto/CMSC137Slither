@@ -8,12 +8,12 @@ import javax.swing.ImageIcon;
 
 public class Tile extends JPanel{
 	
-	private ImageIcon background	= new ImageIcon(getClass().getResource("img/black.png")); 
-	private ImageIcon snakeBody		= new ImageIcon(getClass().getResource("img/bodyGreen.png")); 
-	private ImageIcon headSouth		= new ImageIcon(getClass().getResource("img/headGreenD.png")); 
-	private ImageIcon headNorth		= new ImageIcon(getClass().getResource("img/headGreenN.png")); 
-	private ImageIcon headLeft		= new ImageIcon(getClass().getResource("img/headGreenL.png")); 
-	private ImageIcon headRight		= new ImageIcon(getClass().getResource("img/headGreenR.png")); 
+	private ImageIcon background	= new ImageIcon("img/bg/black.png");
+	private ImageIcon snakeBody		= new ImageIcon("img/snake/bodyGreen.png"); 
+	private ImageIcon headSouth		= new ImageIcon("img/snake/headGreenD.png"); 
+	private ImageIcon headNorth		= new ImageIcon("img/snake/headGreenN.png"); 
+	private ImageIcon headLeft		= new ImageIcon("img/snake/headGreenL.png"); 
+	private ImageIcon headRight		= new ImageIcon("img/snake/headGreenR.png"); 
 
 	public Tile(){
 		super();
@@ -45,6 +45,7 @@ public class Tile extends JPanel{
 			default:
 			    break;
 		}
+		validate();
 	}
 
 	public void placeBody(){
@@ -52,6 +53,16 @@ public class Tile extends JPanel{
 		setLayout(new BorderLayout());
       	setOpaque(false);
       	setPreferredSize(new Dimension(25,25));
-		add(new JLabel(snakeBody));				
+		add(new JLabel(snakeBody));	
+		validate();			
+	}
+
+	public void placeBlank(){
+		removeAll();
+		setLayout(new BorderLayout());
+      	setOpaque(false);
+      	setPreferredSize(new Dimension(25,25));
+		add(new JLabel(background));			
+		validate();
 	}
 }
