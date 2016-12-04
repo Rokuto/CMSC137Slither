@@ -62,8 +62,10 @@ public static int maxPower=15;
 
   public void clearPower() {
     for(int i=0; i<maxPower; i++) {
-      internalBoard[ powerMap[i][0] ][ powerMap[i][1] ] = 0;
-      tiles[ powerMap[i][0] ][ powerMap[i][1] ].placeBlank();
+      if(tiles[ powerMap[i][0] ][ powerMap[i][1] ].getType() != 0) {
+        internalBoard[ powerMap[i][0] ][ powerMap[i][1] ] = 0;
+        tiles[ powerMap[i][0] ][ powerMap[i][1] ].placeBlank();
+      }
     }
   }
 }
