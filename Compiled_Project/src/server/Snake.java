@@ -15,6 +15,7 @@ public class Snake extends Thread{
 
 	private static Tile tiles[][];
 	private static int internalBoard[][];
+	private boolean alive = true;
 
 	private UDPServer server;
 
@@ -31,7 +32,7 @@ public class Snake extends Thread{
 	}
 
 	public void run(){
-		while(true){
+		while(alive){
 			int type = this.move();
 			// System.out.println("");
 			printBoard();
@@ -100,13 +101,20 @@ public class Snake extends Thread{
 	}
 
 	public void renderBoard(){
-		for(int i = 0; i < 4; i++){
-			if(i == 0){
-				internalBoard[ bodyMap[i][0] ][ bodyMap[i][1] ] = direction;
-				tiles[ bodyMap[i][0] ][ bodyMap[i][1] ].changehead(direction);
-			}else{
-				internalBoard[ bodyMap[i][0] ][ bodyMap[i][1] ] = 8;
-				tiles[ bodyMap[i][0] ][ bodyMap[i][1] ].placeBody();
+		if(alive) {
+			for(int i = 0; i < 4; i++){
+				if(i == 0){
+					internalBoard[ bodyMap[i][0] ][ bodyMap[i][1] ] = direction;
+					tiles[ bodyMap[i][0] ][ bodyMap[i][1] ].changehead(direction);
+				}else{
+					internalBoard[ bodyMap[i][0] ][ bodyMap[i][1] ] = 8;
+					tiles[ bodyMap[i][0] ][ bodyMap[i][1] ].placeBody();
+				}
+			}
+		} else {
+			for(int i = 0; i < 4; i++){
+					internalBoard[ bodyMap[i][0] ][ bodyMap[i][1] ] = 0;
+					tiles[ bodyMap[i][0] ][ bodyMap[i][1] ].placeBlank();
 			}
 		}
 	}
@@ -198,29 +206,50 @@ public class Snake extends Thread{
 		return false;
 	}
 
+	public boolean Alive() {
+		return alive;
+	}
+
 	private void isKilled() {
+		//if(alive == true) {
+			alive = false;
+			//detectCollision();
+		//}
+
 		for(int i=0; i<4; i++) {
 			tiles[ bodyMap[i][0] ][ bodyMap[i][1] ].placeBlank();
+			internalBoard[ bodyMap[i][0] ][ bodyMap[i][1] ] = 0;
 		}
+		//try {
+			System.out.println("Snake " + playerNo + " died");
+			//sleep(500);
+			//this.join();
+		//} catch(InterruptedException e) {
+		//	System.out.println("Interrupted");
+		//}
 	}
 
 	private void detectCollision() {
 		for(int i=0; i<ReceiveServer.players; i++) {
-			if(ReceiveServer.snakes[i].playerNo != playerNo) {
-				if(ReceiveServer.snakes[i].isHead(bodyMap[0][0], bodyMap[0][1]) || ReceiveServer.snakes[i].isBody(bodyMap[0][0], bodyMap[0][1])) {
-					score++;
-					System.out.println("Snake " + playerNo + "killed snake " + ReceiveServer.snakes[i].playerNo + " Score " + score);
-					try {
+			if(ReceiveServer.snakes[i].playerNo != playerNo && ReceiveServer.snakes[i].Alive()) {
+					if(ReceiveServer.snakes[i].isHead(bodyMap[0][0], bodyMap[0][1])) {
+						score++;
+						System.out.println("Snake " + playerNo + " and snake " + ReceiveServer.snakes[i].playerNo + " killed each other ");
+						ReceiveServer.snakes[i].isKilled();
+						ReceiveServer.snakes[i].printBoard();
+						ReceiveServer.snakes[i].renderBoard();
 						isKilled();
-						ReceiveServer.snakes[i].join();
-					} catch(InterruptedException e) {
-						System.out.println("Interrupted");
+						printBoard();
+						renderBoard();
+					} else if(ReceiveServer.snakes[i].isBody(bodyMap[0][0], bodyMap[0][1])) {
+						score++;
+						System.out.println("Snake " + playerNo + " killed snake " + ReceiveServer.snakes[i].playerNo + " Score " + score);
+						ReceiveServer.snakes[i].isKilled();
+						ReceiveServer.snakes[i].printBoard();
 					}
-
 				}
 			}
 		}
-	}
 
 	private int detectPowerup() {
 		for(int i=0; i<SpawnPower.maxPower; i++) {

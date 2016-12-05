@@ -3,12 +3,14 @@ import java.util.Random;
 public class SpawnPower extends Thread{
 
 private static Tile tiles[][];
+private static int internalBoard[][];
 public static int players;
 public static int powerMap[][];
 public static int maxPower=15;
 
-  public SpawnPower(Tile tiles[][]) {
+  public SpawnPower(Tile tiles[][], int internalBoard[][]) {
     this.tiles = tiles;
+    this.internalBoard = internalBoard;
 
     powerMap = new int[maxPower][2];
   }
@@ -44,6 +46,8 @@ public static int maxPower=15;
         powerMap[i][0] = x;
         powerMap[i][1] = y;
 
+        internalBoard[x][y] = type+4;
+
         switch(type) {
           case 1: tiles[x][y].placeSpeed();
                   break;
@@ -58,7 +62,10 @@ public static int maxPower=15;
 
   public void clearPower() {
     for(int i=0; i<maxPower; i++) {
-      tiles[ powerMap[i][0] ][ powerMap[i][1] ].placeBlank();
+      if(tiles[ powerMap[i][0] ][ powerMap[i][1] ].getType() != 0) {
+        internalBoard[ powerMap[i][0] ][ powerMap[i][1] ] = 0;
+        tiles[ powerMap[i][0] ][ powerMap[i][1] ].placeBlank();
+      }
     }
   }
 }

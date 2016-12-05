@@ -6,7 +6,7 @@ import java.net.MulticastSocket;
 
 
 public class ReceiveClient extends Thread {
-	
+
 	private String playerNo;
 	private static Tile tiles[][];
 	private static int internalBoard[][];
@@ -29,17 +29,17 @@ public class ReceiveClient extends Thread {
 	      	socket = new MulticastSocket(8888);
 	      	InetAddress address = InetAddress.getByName("224.2.2.3");
 	  	    socket.joinGroup(address);
-	 
+
 	      	while (true) {
 	        	inPacket = new DatagramPacket(inBuf, inBuf.length);
 	        	socket.receive(inPacket);
 	        	String msg = new String(inBuf, 0, inPacket.getLength());
 	        	// System.out.println("From " + inPacket.getAddress() + ":" + inPacket.getPort() + " Msg : " + msg);
 
-	  			// System.out.println(msg);  
+	  			// System.out.println(msg);
 	  			// msg.split(' ');
 	  			// System.out.println(msg.trim().split(" ").length);
-	  			
+
 	  			String  token[] = msg.trim().split(" ");
 	  			if(token.length != 82){
 	  				System.out.println(token.length);
@@ -57,17 +57,23 @@ public class ReceiveClient extends Thread {
 		  			 		internalBoard[i][j] = Integer.parseInt(token[k]);
 		  			 		k++;
 		  			 		// System.out.print(internalBoard[i][j] + " ");
-		  			 		
+
 		  			 		if(internalBoard[i][j] == 8){
 								tiles[i][j].placeBody();
 		  			 		}else if(internalBoard[i][j] == 0){
 								tiles[i][j].placeBlank();
-		  			 		}else{
+							} else if(internalBoard[i][j] == 5){
+								tiles[i][j].placeSpeed();
+							} else if(internalBoard[i][j] == 6){
+								tiles[i][j].placeSlow();
+							} else if(internalBoard[i][j] == 7){
+								tiles[i][j].placePoison();
+							} else{
 								tiles[i][j].changehead(internalBoard[i][j]);
 		  			 		}
 		  				}
 		  				// System.out.println("");
-		  			} 	
+		  			}
 	  			}
 	    	}
 	    }catch(IOException ioe){

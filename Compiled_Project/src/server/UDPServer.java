@@ -47,7 +47,7 @@ public class UDPServer extends JFrame {
 			}
 		}
 
-		new SpawnPower(tiles).start();
+		new SpawnPower(tiles, internalBoard).start();
 
 		try {
     		socket = new DatagramSocket();
