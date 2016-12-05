@@ -42,7 +42,7 @@ public class ReceiveClient extends Thread {
 
 	  			String  token[] = msg.trim().split(" ");
 	  			if(token.length != 82){
-	  				System.out.println(token.length);
+	  				// System.out.println(token.length);
 	  				continue;
 	  			}
 	  			int k = 0;

@@ -14,9 +14,9 @@ public class Tile extends JPanel{
 	private ImageIcon headNorth		= new ImageIcon("img/snake/headGreenN.png");
 	private ImageIcon headLeft		= new ImageIcon("img/snake/headGreenL.png");
 	private ImageIcon headRight		= new ImageIcon("img/snake/headGreenR.png");
-	private ImageIcon speed 			= new ImageIcon("img/powerup/speed.png");
-	private ImageIcon slow				= new ImageIcon("img/powerup/slow.png");
-	private ImageIcon poison 			= new ImageIcon("img/powerup/poison.png");
+	private ImageIcon speed 		= new ImageIcon("img/powerup/speed.png");
+	private ImageIcon slow			= new ImageIcon("img/powerup/slow.png");
+	private ImageIcon poison 		= new ImageIcon("img/powerup/poison.png");
 
 	public Tile(){
 		super();

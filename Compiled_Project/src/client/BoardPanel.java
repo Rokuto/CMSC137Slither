@@ -60,7 +60,7 @@ public class BoardPanel extends JPanel{
       socket = new DatagramSocket();
       initClient();
     }catch(IOException ioe){
-      System.out.println(ioe);
+      // System.out.println(ioe);
     }
 
     /* Snake movements */
@@ -105,7 +105,7 @@ public class BoardPanel extends JPanel{
       // System.out.println("From " + inPacket.getAddress() + ":" + inPacket.getPort() + " Msg : " + msg);
 
     }catch(IOException ioe){
-      System.out.println(ioe);
+      // System.out.println(ioe);
     }
   }
 

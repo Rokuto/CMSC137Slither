@@ -21,11 +21,11 @@ public class MoveAction implements KeyListener{
     switch(e.getKeyCode()){
     	case KeyEvent.VK_LEFT:
         client.sendData("1");
-        System.out.println("1");
+        // System.out.println("1");
         break;
       case KeyEvent.VK_RIGHT:
         client.sendData("2");
-        System.out.println("2");
+        // System.out.println("2");
         break;
       case KeyEvent.VK_UP:
         break;
@@ -34,11 +34,11 @@ public class MoveAction implements KeyListener{
       
       case KeyEvent.VK_A:
         client.sendData("1");
-        System.out.println("1");
+        // System.out.println("1");
         break;
       case KeyEvent.VK_D:
         client.sendData("2");
-        System.out.println("2");
+        // System.out.println("2");
         break;
       case KeyEvent.VK_W:
         break;
