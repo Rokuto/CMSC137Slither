@@ -4,6 +4,7 @@ import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+
 import java.io.IOException;
 
 import java.net.InetAddress;
@@ -66,6 +67,8 @@ public class BoardPanel extends JPanel{
     /* Snake movements */
     addKeyListener(new MoveAction(this));
 
+    addMouseListener(new MouseAction(this));
+
     /* Recieve information */
     try{
       new ReceiveClient(tiles, internalBoard, playerNo).start();
@@ -74,7 +77,7 @@ public class BoardPanel extends JPanel{
     }
 
     setFocusable(true);
-		//requestFocusInWindow();
+		requestFocusInWindow();
 	}
 
   private void initClient(){

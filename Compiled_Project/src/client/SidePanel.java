@@ -50,7 +50,8 @@ public class SidePanel extends JPanel{
 		chatbox = new Chatbox(this); // initailization
 		add( chatbox , BorderLayout.SOUTH ); // add to panel
 
-		setFocusable(true);
+		// setFocusable(true);
+		requestFocusInWindow();
 	}
 
 	public String getName(){
