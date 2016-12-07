@@ -1,8 +1,11 @@
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.BufferedReader;
 
 import java.net.InetAddress;
 import java.net.DatagramPacket;
 import java.net.MulticastSocket;
+
 
 import java.util.HashMap;
 
@@ -45,7 +48,8 @@ public class ReceiveServer extends Thread {
 	        	String msg = new String(inBuf, 0, inPacket.getLength());
 	        	// System.out.println("From " + inPacket.getAddress() + ":" + inPacket.getPort() + " Msg : " + msg);
 	        	String key = inPacket.getAddress()+""+inPacket.getPort();
-	        	if(pAdd.get(key) == null){
+	        	
+	        	if(pAdd.get(key) == null){ // newly connected person
 	        		// System.out.println("NULL");
 	        		pAdd.put(key, players);
 	        	}else{
@@ -66,16 +70,39 @@ public class ReceiveServer extends Thread {
 	        		try{
 	        			Thread.sleep(1000);
 	        		}catch(InterruptedException err){
-
 	        		}
 
-	        		server.sendData("" + players);
-	        		snakes[players] = new Snake(server, tiles, internalBoard, players);
-	        		snakes[players].start();
 
-	        		players++;
+	        		try{
+		        		BufferedReader reader = new BufferedReader(new FileReader("img/menu/highscores.txt"));
+						String line = reader.readLine();
+						String[][] highscores = new String[3][2];
+						
+						while (line != null) {
+							for(int i = 0; i < 3; i++){
+								String[] word = line.split("\\s+");
+								for(int j = 0; j < 2; j++){
+									System.out.println(word[j]);
+									highscores[i][j] = word[j];
+								}
+								//highscores[i] = word;
+								// lbl_name[i].setText(word[0]);
+								// lbl_score[i].setText(word[1]);
+								line = reader.readLine();
+							}
+						}
+					}catch(Exception e){
+						e.printStackTrace();
+					}
 
-	        		expandPlayerSize();
+
+	        		server.sendData("" + players); // define the specific player number
+	        		snakes[players] = new Snake(server, tiles, internalBoard, players); // create the snake of the player
+	        		snakes[players].start(); // start the snake
+
+	        		players++; // increase number of players
+
+	        		expandPlayerSize(); // increase player array
 	        	}
 	    	}
 	    }catch(IOException ioe){
@@ -86,15 +113,15 @@ public class ReceiveServer extends Thread {
 	private void expandPlayerSize(){
 		if(players > max-1){
 
-			max++;
-			Snake temp[] = new Snake[max];
+			max++; // increase max allowable snakes
+			Snake temp[] = new Snake[max]; // create a new array
 
 			/* Migration of previous data */
 			for(int i = 0; i < max-1; i++){
 				temp[i] = snakes[i];
 			}
 
-			this.snakes = temp;
+			this.snakes = temp; // use the new expanded version 
 		}
 	}
 }
