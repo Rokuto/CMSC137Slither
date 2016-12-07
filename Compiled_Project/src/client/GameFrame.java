@@ -30,4 +30,12 @@ public class GameFrame extends JFrame {
 		setVisible(true);
 	}
 
+	public void gameOver(){
+		System.out.println("Its Game Over");
+		this.dispose();
+
+		MenuUI menu = new MenuUI();
+		menu.cardLayout_setup();
+	}
+
 }

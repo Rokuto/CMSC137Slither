@@ -48,7 +48,7 @@ public class BoardPanel extends JPanel{
 		setPreferredSize(new Dimension(COL_COUNT * TILE_SIZE, ROW_COUNT * TILE_SIZE));
 		// setBackground(Color.BLACK);
 		
-    /* Create the boars */
+    /* Create the board */
     for(int i = 0; i < dim; i++){
       for(int j = 0; j < dim; j++){
         tiles[i][j] = new Tile();
@@ -71,7 +71,7 @@ public class BoardPanel extends JPanel{
 
     /* Recieve information */
     try{
-      new ReceiveClient(tiles, internalBoard, playerNo).start();
+      new ReceiveClient(tiles, internalBoard, playerNo, this.game).start();
     }catch(IOException e){
 
     }
@@ -81,6 +81,7 @@ public class BoardPanel extends JPanel{
 	}
 
   private void initClient(){
+    /* Initialize connection */
     String msg;
     msg = "Init ";
 
