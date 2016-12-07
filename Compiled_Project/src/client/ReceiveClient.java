@@ -12,6 +12,7 @@ public class ReceiveClient extends Thread {
 	private String playerNo;
 	private static Tile tiles[][];
 	private static int internalBoard[][];
+	public static int score;
 
 	private MulticastSocket socket = null;
     private DatagramPacket inPacket = null;
@@ -24,6 +25,7 @@ public class ReceiveClient extends Thread {
 		this.tiles = tiles;
 		this.playerNo = playerNo;
 		this.internalBoard = internalBoard;
+		this.score = score;
 	}
 
 	public void run(){
@@ -41,7 +43,7 @@ public class ReceiveClient extends Thread {
 	        	String msg = new String(inBuf, 0, inPacket.getLength());
 
 	  			String  token[] = msg.trim().split(" ");
-	  			if(token.length != 82){
+	  			if(token.length != 83){
 	  				/* Wrong message length */
 	  				// System.out.println(token.length);
 	  				continue;
@@ -50,6 +52,9 @@ public class ReceiveClient extends Thread {
 	  			/* correct board for the correct player */
 	  			if(token[k].trim().equals(playerNo)){
 	  				k++;
+						score = Integer.parseInt(token[k]);
+						k++;
+						System.out.println(score);
 	  				/* Build the board */
 		  			for(int i = 0; i < dim; i++){
 		  				for(int j = 0; j < dim; j++){
