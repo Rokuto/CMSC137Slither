@@ -70,7 +70,7 @@ public class Snake extends Thread{
 	public void printBoard(){
 		// System.out.println("Snake " + playerNo);
 		// String msg = " ";
-		String msg = playerNo + " ";
+		String msg = playerNo + " " + score + " ";
 		for(int i = bodyMap[0][0] - 4; i < bodyMap[0][0] + 5; i++){
 			for(int j = bodyMap[0][1] - 4; j < bodyMap[0][1] + 5; j++){
 				if(i < 0 || i > (internalBoard[0].length - 1) || j < 0 || j > (internalBoard[0].length - 1)){

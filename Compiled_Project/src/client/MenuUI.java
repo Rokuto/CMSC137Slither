@@ -36,6 +36,7 @@ import java.io.IOException;
 public class MenuUI extends JFrame implements ActionListener{
 	private JFrame frame_main;
 	private JFrame frame_game;
+	public static int score;
 
 	//image file instantiation
 	Image img_background 	= new ImageIcon("img/menu/backgroundv2.jpg").getImage();
@@ -145,6 +146,11 @@ public class MenuUI extends JFrame implements ActionListener{
 		//frame component
 		frame_main = new JFrame("Slitherin");
 
+		//score
+		JLabel label_score = new JLabel("Score " + ReceiveClient.score);
+		label_score.setBounds(365, 250, 200, 40);
+		label_score.setFont(font);
+		label_score.setForeground(Color.WHITE);
 
 		//set textfield properties
 		txtfld_usrname.setBorder(border);
@@ -197,6 +203,7 @@ public class MenuUI extends JFrame implements ActionListener{
 		pnl_main.add(btn_enter);
 		pnl_main.add(btn_highscores);
 		pnl_main.add(btn_instructions);
+		pnl_main.add(label_score);
 
 		//highscores and instructions
 		lbl_highscores.setBounds(270, 50, 300, 50);
